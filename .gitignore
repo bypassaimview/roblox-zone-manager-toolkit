@@ -1,0 +1,14 @@
+# Roblox / Rojo
+*.rbxl
+*.rbxlx
+*.rbxm
+*.rbxmx
+sourcemap.json
+
+# Tooling
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store

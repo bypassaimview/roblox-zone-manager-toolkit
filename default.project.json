@@ -1,0 +1,32 @@
+{
+  "name": "roblox-zone-manager-toolkit",
+  "tree": {
+    "$className": "DataModel",
+    "ReplicatedStorage": {
+      "ZoneToolkit": {
+        "$className": "Folder",
+        "ZoneConfig": {
+          "$path": "src/ReplicatedStorage/ZoneToolkit/ZoneConfig.lua"
+        }
+      }
+    },
+    "ServerScriptService": {
+      "ZoneToolkit": {
+        "$className": "Folder",
+        "ZoneService": {
+          "$path": "src/ServerScriptService/ZoneToolkit/ZoneService.lua"
+        },
+        "ZoneToolkitServer": {
+          "$path": "src/ServerScriptService/ZoneToolkit/ZoneToolkitServer.server.lua"
+        }
+      }
+    },
+    "StarterPlayer": {
+      "StarterPlayerScripts": {
+        "ZoneDebugClient": {
+          "$path": "src/StarterPlayer/StarterPlayerScripts/ZoneDebugClient.client.lua"
+        }
+      }
+    }
+  }
+}
