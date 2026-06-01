@@ -8,6 +8,10 @@ local UserInputService = game:GetService("UserInputService")
 local player = Players.LocalPlayer
 local config = require(ReplicatedStorage:WaitForChild("ZoneToolkit"):WaitForChild("ZoneConfig"))
 
+if not config.DebugVisualsEnabled then
+	return
+end
+
 local remotes = ReplicatedStorage:WaitForChild("ZoneToolkitRemotes")
 local requestZones = remotes:WaitForChild("RequestZones")
 

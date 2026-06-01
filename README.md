@@ -8,7 +8,7 @@ A Rojo-based Roblox zone system for detecting when players enter and leave confi
 - Enter and exit events for server scripts
 - Zone types for safe areas, damage zones, music zones, teleport zones, and custom gameplay areas
 - Player zone tracking
-- Debug visualizer toggled with `F6`
+- Optional debug visualizer toggled with `F6`
 - Optional example zones for quick testing
 - Runtime API for creating zones from scripts
 
@@ -59,10 +59,24 @@ src/
   ServerScriptService/
     ZoneToolkit/
       ZoneService.lua
-      ZoneToolkitServer.server.lua
+      ZoneRuntime.server.lua
+      ZoneDebug/
+        ZoneDebugServer.server.lua
   StarterPlayer/
     StarterPlayerScripts/
-      ZoneDebugClient.client.lua
+      ZoneDebug/
+        ZoneDebugClient.client.lua
+```
+
+## Debug Is Optional
+
+The core system is `ZoneService.lua` plus `ZoneRuntime.server.lua`. The debug UI and its remote API are separated into `ZoneDebug/`.
+
+To ship without debug tools, remove or disable:
+
+```text
+ServerScriptService/ZoneToolkit/ZoneDebug/ZoneDebugServer
+StarterPlayer/StarterPlayerScripts/ZoneDebug/ZoneDebugClient
 ```
 
 ## Usage
@@ -70,4 +84,4 @@ src/
 1. Install Rojo.
 2. Run `rojo serve` from this folder.
 3. Connect Roblox Studio to the Rojo server.
-4. Press `F6` in Play mode to toggle zone debug visuals.
+4. Press `F6` in Play mode to toggle zone debug visuals if the optional debug scripts are included.
