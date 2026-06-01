@@ -27,6 +27,7 @@ local function createExamples()
 	ZoneService:CreateZone({
 		name = "SafeZone",
 		zoneType = "Safe",
+		shape = "Box",
 		size = Vector3.new(22, 8, 22),
 		cframe = CFrame.new(-28, 4, 0),
 		parent = folder,
@@ -35,6 +36,7 @@ local function createExamples()
 	ZoneService:CreateZone({
 		name = "DamageZone",
 		zoneType = "Damage",
+		shape = "Box",
 		damagePerSecond = 15,
 		size = Vector3.new(18, 8, 18),
 		cframe = CFrame.new(0, 4, 0),
@@ -44,9 +46,28 @@ local function createExamples()
 	ZoneService:CreateZone({
 		name = "TeleportZone",
 		zoneType = "Teleport",
+		shape = "Box",
 		teleportTo = Vector3.new(-28, 8, 0),
 		size = Vector3.new(16, 8, 16),
 		cframe = CFrame.new(28, 4, 0),
+		parent = folder,
+	})
+
+	ZoneService:CreateZone({
+		name = "SphereQuestZone",
+		zoneType = "Quest",
+		shape = "Sphere",
+		size = Vector3.new(18, 18, 18),
+		cframe = CFrame.new(0, 9, -30),
+		parent = folder,
+	})
+
+	ZoneService:CreateZone({
+		name = "CylinderMusicZone",
+		zoneType = "Music",
+		shape = "Cylinder",
+		size = Vector3.new(22, 8, 22),
+		cframe = CFrame.new(0, 4, 30),
 		parent = folder,
 	})
 end

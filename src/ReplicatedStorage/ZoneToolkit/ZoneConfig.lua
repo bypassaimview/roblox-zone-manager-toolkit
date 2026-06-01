@@ -6,6 +6,7 @@ local Config = {}
 Config.ZoneTag = "Zone"
 Config.CheckInterval = 0.15
 Config.CreateExampleZones = true
+Config.DefaultZoneShape = "Box"
 
 Config.DebugVisualsEnabled = true
 Config.DebugToggleKey = Enum.KeyCode.F6

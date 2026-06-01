@@ -66,22 +66,14 @@ local function makeAdornment(zone)
 	part.CanCollide = false
 	part.CanTouch = false
 	part.CanQuery = false
-	part.Transparency = 1
+	part.Transparency = 0.68
 	part.Size = zone.size
 	part.CFrame = zone.cframe
+	part.Color = zone.color
+	part.Material = Enum.Material.ForceField
+	part.Shape = zone.shape == "Sphere" and Enum.PartType.Ball or (zone.shape == "Cylinder" and Enum.PartType.Cylinder or Enum.PartType.Block)
 	part.Parent = workspace
 	table.insert(debugParts, part)
-
-	local box = Instance.new("BoxHandleAdornment")
-	box.Name = "ZoneDebug_" .. zone.name
-	box.Adornee = part
-	box.AlwaysOnTop = true
-	box.ZIndex = 5
-	box.Size = zone.size
-	box.Color3 = zone.color
-	box.Transparency = 0.62
-	box.Parent = gui
-	table.insert(adornments, box)
 
 	local outline = Instance.new("SelectionBox")
 	outline.Name = "ZoneDebugOutline_" .. zone.name

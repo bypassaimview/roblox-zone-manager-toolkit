@@ -25,12 +25,13 @@ Then add attributes:
 ```text
 ZoneName = "Shop"
 ZoneType = "Safe"
+ZoneShape = "Box"
 DamagePerSecond = 10
 TeleportTo = "0, 8, 0"
 MusicId = "rbxassetid://123456"
 ```
 
-Only `ZoneName` is required. Zone parts are expected to be transparent, anchored, and non-colliding.
+Only `ZoneName` is required. `ZoneShape` can be `Box`, `Sphere`, or `Cylinder`. Zone parts are expected to be transparent, anchored, and non-colliding.
 
 ## Server API
 

@@ -58,11 +58,13 @@ end
 local function readZone(part)
 	local zoneType = part:GetAttribute("ZoneType") or "Custom"
 	local zoneName = part:GetAttribute("ZoneName") or part.Name
+	local zoneShape = part:GetAttribute("ZoneShape") or Config.DefaultZoneShape or "Box"
 
 	return {
 		part = part,
 		name = zoneName,
 		type = zoneType,
+		shape = zoneShape,
 		damagePerSecond = tonumber(part:GetAttribute("DamagePerSecond")) or Config.DefaultDamagePerSecond,
 		teleportTo = parseVector3(part:GetAttribute("TeleportTo")),
 		musicId = part:GetAttribute("MusicId"),
@@ -110,6 +112,16 @@ local function getHumanoid(player)
 end
 
 local function isRootInsideZone(rootPart, zone)
+	if zone.shape == "Sphere" then
+		local radius = math.max(zone.part.Size.X, zone.part.Size.Y, zone.part.Size.Z) * 0.5
+		return (rootPart.Position - zone.part.Position).Magnitude <= radius
+	elseif zone.shape == "Cylinder" then
+		local localPosition = zone.part.CFrame:PointToObjectSpace(rootPart.Position)
+		local radius = math.max(zone.part.Size.X, zone.part.Size.Z) * 0.5
+		local halfHeight = zone.part.Size.Y * 0.5
+		return Vector2.new(localPosition.X, localPosition.Z).Magnitude <= radius and math.abs(localPosition.Y) <= halfHeight
+	end
+
 	overlapParams.FilterDescendantsInstances = { rootPart }
 	local parts = Workspace:GetPartBoundsInBox(zone.part.CFrame, zone.part.Size, overlapParams)
 	return #parts > 0
@@ -212,6 +224,7 @@ function ZoneService:GetZones()
 		table.insert(zones, {
 			name = zone.name,
 			type = zone.type,
+			shape = zone.shape,
 			path = zone.path,
 			size = zone.part.Size,
 			cframe = zone.part.CFrame,
@@ -249,10 +262,12 @@ function ZoneService:CreateZone(options)
 	part.Transparency = options.transparency or Config.DefaultZoneTransparency
 	part.Color = options.color or Config.ZoneTypeColors[options.zoneType or "Custom"] or Config.DefaultZoneColor
 	part.Material = Enum.Material.ForceField
+	part.Shape = options.shape == "Sphere" and Enum.PartType.Ball or (options.shape == "Cylinder" and Enum.PartType.Cylinder or Enum.PartType.Block)
 	part.Size = options.size or Vector3.new(16, 8, 16)
 	part.CFrame = options.cframe or CFrame.new(0, 4, 0)
 	part:SetAttribute("ZoneName", options.name or part.Name)
 	part:SetAttribute("ZoneType", options.zoneType or "Custom")
+	part:SetAttribute("ZoneShape", options.shape or Config.DefaultZoneShape or "Box")
 
 	if options.damagePerSecond then
 		part:SetAttribute("DamagePerSecond", options.damagePerSecond)
